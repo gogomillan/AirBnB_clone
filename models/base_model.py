@@ -19,14 +19,17 @@ class BaseModel:
 
     def __str__(self):
         """ Function that prints class name, id and __dic """
-        pass
+        print("[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id,
+                                        self.__dict__))
 
     def save(self):
         """ Function that updates the public instance attribute
 updated_at with the current datetime """
-        pass
+        self.updated_at = datetime.now()
 
     def to_dict(self):
         """ returns a dictionary containing all keys/values of dict
  of the instance """
-        pass
+        new_dict = self.__dict__.copy()
+        if "created_at" in __dict__:
+            
