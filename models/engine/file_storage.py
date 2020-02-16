@@ -4,7 +4,10 @@ Here you can find the FileStorage Class
 """
 
 import json
-from model.base_model import BaseModel
+from models.base_model import BaseModel
+
+classes = {"BaseModel": BaseModel}
+
 
 class FileStorage:
     """that serializes instances to a JSON file and deserializes
@@ -21,3 +24,22 @@ JSON file to instances"""
         if obj is not None:
             key = obj.__class__.__name__ + "." + obj.id
             self.__objects[key] = obj
+
+    def save(self):
+        """serializes __objects to the JSON file (path: __file_path)"""
+        json_objects = {}
+        for key in self.__objects:
+            json_objects[key] = self.__objects[key].to_dic()
+        with open(self.__file_path, 'w', encoding="utf-8") as f:
+            json.dump(json_objects, f)
+
+    def reload(self):
+        """deserializes the JSON file to __objects
+(only if the JSON file (__file_path)"""
+        try:
+            with open(self.__file_path, 'r', encoding='utf-8') as f:
+                jsf = json.load(f)
+            for key in jsf:
+                self.__objects[key] = classes[jsf[key]["__class__"](**jsf[key])]
+        except:
+            pass
