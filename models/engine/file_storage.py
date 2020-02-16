@@ -29,7 +29,7 @@ JSON file to instances"""
         """serializes __objects to the JSON file (path: __file_path)"""
         json_objects = {}
         for key in self.__objects:
-            json_objects[key] = self.__objects[key].to_dic()
+            json_objects[key] = self.__objects[key].to_dict()
         with open(self.__file_path, 'w', encoding="utf-8") as f:
             json.dump(json_objects, f)
 
@@ -40,6 +40,6 @@ JSON file to instances"""
             with open(self.__file_path, 'r', encoding='utf-8') as f:
                 jsf = json.load(f)
             for key in jsf:
-                self.__objects[key] = classes[jsf[key]["__class__"](**jsf[key])]
+                self.__objects[key] = classes[jsf[key]["__class__"]](**jsf[key])
         except:
             pass
