@@ -32,7 +32,7 @@ class BaseModel:
     def __str__(self):
         """Function that prints class name, id and __dic"""
         return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id,
-                                        self.__dict__)
+                                         self.__dict__)
 
     def save(self):
         """Function that updates the public instance attribute
