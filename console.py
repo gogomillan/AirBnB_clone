@@ -3,14 +3,18 @@
 Create the console
 """
 
-
 import cmd
+from models import storage
+import sys
+from models.base_model import BaseModel
+from datetime import datetime
+import shlex
 
+classes = {"BaseMode": BaseModel}
 
 class HBNBCommand(cmd.Cmd):
     """ Console """
     prompt = '(hbnb) '
-    file = None
 
     def do_EOF(self, line):
         """Function that do EOF"""
@@ -20,9 +24,19 @@ class HBNBCommand(cmd.Cmd):
         """Function that close the program"""
         return True
 
-    def do_create(self, line):
+    def do_create(self, arg):
         """Creates a new instace of basemodel"""
-        print("this is a funny method")
+        args = shlex.split(arg)
+        if len(args) == 0:
+            print("** class name missing **")
+            return False
+        if args[0] in classes:
+            instance = classes[args[0]]()
+        else:
+            print("** class doesn't exist **")
+            return False
+        print(instance.id)
+        instance.save()
 
     def do_show(self, line):
         """Prints ths string representation of an
@@ -45,9 +59,7 @@ or updating attributes"""
 
     def emptyline(self):
         """Called when an empty line is entered in response to the prompt"""
-        if self.lastcmd:
-            self.lastcmd = ""
-            return self.onecmd('\n')
+        return False
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
