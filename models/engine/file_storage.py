@@ -40,6 +40,8 @@ JSON file to instances"""
             with open(self.__file_path, 'r', encoding='utf-8') as f:
                 jsf = json.load(f)
             for key in jsf:
-                self.__objects[key] = classes[jsf[key]["__class__"]](**jsf[key])
+                self.__objects[key] = classes[jsf[key]
+                                              ["__class__"]]
+                (**jsf[key])
         except:
             pass
