@@ -59,9 +59,21 @@ instace based on the class and id"""
         else:
             print("** class doesn't exist**")
 
-    def do_destroy(self, line):
+    def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""
-        print("this is a funny method")
+        args = shlex.split(arg)
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] in classes:
+            if len(args) > 1:
+                key = args[0] + "." + args[1]
+                if key in models.storage.all():
+                    models.storage.all().pop(key)
+                    models.storage.save()
+                else:
+                    print("** no instance found **")
+            else:
+                print("** class doesn't exist **")
 
     def do_all(self, arg):
         """Prints all string representation of all instances based or
@@ -84,10 +96,15 @@ not on the class name"""
         else:
             print("** class doesn't exist **")
 
-    def do_update(self, line):
+    def do_update(self, arg):
         """Updates an instance based on the class name and id by adding
-or updating attributes"""
-        print("this is a funny method")
+        or updating attributes"""
+        # args = shlex.split(arg)
+        # if len(args) == 0:
+        #   print("** class name missing **")
+        # elif args[0] in classes:
+        #   if len(args) > 1:
+        #      k = args[0] + "." + args[1]
 
     def emptyline(self):
         """Called when an empty line is entered in response to the prompt"""

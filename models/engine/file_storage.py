@@ -35,7 +35,7 @@ class FileStorage:
 
     def reload(self):
         """deserializes the JSON file to __objects
-(only if the JSON file (__file_path)"""
+        (only if the JSON file (__file_path)"""
         try:
             with open(self.__file_path, 'r', encoding='utf-8') as f:
                 js = json.load(f)
