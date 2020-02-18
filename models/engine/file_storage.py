@@ -11,7 +11,7 @@ classes = {"BaseModel": BaseModel}
 
 class FileStorage:
     """that serializes instances to a JSON file and deserializes
-JSON file to instances"""
+    JSON file to instances"""
     __file_path = "file.json"
     __objects = {}
 
@@ -38,10 +38,8 @@ JSON file to instances"""
 (only if the JSON file (__file_path)"""
         try:
             with open(self.__file_path, 'r', encoding='utf-8') as f:
-                jsf = json.load(f)
-            for key in jsf:
-                self.__objects[key] = classes[jsf[key]
-                                              ["__class__"]]
-                (**jsf[key])
+                js = json.load(f)
+            for key in js:
+                self.__objects[key] = classes[js[key]["__class__"]](**js[key])
         except:
             pass
