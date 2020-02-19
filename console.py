@@ -6,7 +6,6 @@ Create the console
 import models
 import cmd
 from models import storage
-import sys
 from models.base_model import BaseModel
 from datetime import datetime
 import shlex
