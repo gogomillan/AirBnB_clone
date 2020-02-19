@@ -51,7 +51,7 @@ instace based on the class and id"""
             if len(args) > 1:
                 key = args[0] + "." + args[1]
                 if key in models.storage.all():
-                    print(models.storage.all[key])
+                    print(models.storage.all()[key])
                 else:
                     print("** no instance found **")
             else:
@@ -77,7 +77,7 @@ instace based on the class and id"""
 
     def do_all(self, arg):
         """Prints all string representation of all instances based or
-not on the class name"""
+        not on the class name"""
         args = shlex.split(arg)
         lt_obj = []
         if len(args) == 0:
@@ -99,12 +99,29 @@ not on the class name"""
     def do_update(self, arg):
         """Updates an instance based on the class name and id by adding
         or updating attributes"""
-        # args = shlex.split(arg)
-        # if len(args) == 0:
-        #   print("** class name missing **")
-        # elif args[0] in classes:
-        #   if len(args) > 1:
-        #      k = args[0] + "." + args[1]
+        args = shlex.split(arg)
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] in classes:
+            if len(args) == 1:
+                print("** instance id missing **")
+            elif (args[0] + "." + args[1]) in models.storage.all():
+                if len(args) == 2:
+                    print("** attribute name missing **")
+                else:
+                    if len(args) == 3:
+                        print("** value missing **")
+                    else:
+                        if len(arg.split('"')) == 1:
+                            v_p = args[3]
+                        else:
+                            v_p = arg.split('"')[1]
+                            it = models.storage.all()[args[0] + "." + args[1]]
+                            setattr(it, args[2], v_p)
+                            models.storage.all()[args[0] + "." + args[1]] = it
+                            storage.save()
+        else:
+            print("** no instance found **")
 
     def emptyline(self):
         """Called when an empty line is entered in response to the prompt"""
