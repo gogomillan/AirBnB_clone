@@ -73,7 +73,9 @@ instace based on the class and id"""
                 else:
                     print("** no instance found **")
             else:
-                print("** class doesn't exist **")
+                print("** instance id missing **")
+        else:
+            print("** class doesn't exist **")
 
     def do_all(self, arg):
         """Prints all string representation of all instances based or
@@ -120,9 +122,10 @@ instace based on the class and id"""
                             setattr(it, args[2], v_p)
                             models.storage.all()[args[0] + "." + args[1]] = it
                             storage.save()
+            else:
+                print("** no instance found **")
         else:
-            print("** no instance found **")
-
+            print("** class name missing **")
     def emptyline(self):
         """Called when an empty line is entered in response to the prompt"""
         return False
