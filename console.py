@@ -63,7 +63,7 @@ instace based on the class and id"""
             else:
                 print("** instance id missing **")
         else:
-            print("** class doesn't exist**")
+            print("** class doesn't exist **")
 
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""
@@ -98,9 +98,7 @@ instace based on the class and id"""
             for key in models.storage.all():
                 if args[0] in key:
                     lt_obj.append(str(models.storage.all()[key]))
-            print("[", end="")
-            print(", ".join(lt_obj), end="")
-            print("]")
+            print("[\"" + ", ".join(lt_obj) + "\"]")
         else:
             print("** class doesn't exist **")
 
