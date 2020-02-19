@@ -7,7 +7,8 @@ import json
 from models.base_model import BaseModel
 from models.user import User
 
-classes = {"BaseModel": BaseModel, "User": User}
+classes = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,
+           "City": City, "Place": Place, "Review": Review, "State": State}
 
 
 class FileStorage:

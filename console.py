@@ -12,7 +12,8 @@ from datetime import datetime
 import shlex
 from models.user import User
 
-classes = {"BaseModel": BaseModel, "User": User}
+classes = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,
+           "City": City, "Place": Place, "Review": Review, "State": State}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -103,30 +104,41 @@ instace based on the class and id"""
         """Updates an instance based on the class name and id by adding
         or updating attributes"""
         args = shlex.split(arg)
+        integers = ["number_rooms", "number_bathrooms", "max_guest",
+                    "price_by_night"]
+        floats = ["latitude", "longitude"]
         if len(args) == 0:
             print("** class name missing **")
         elif args[0] in classes:
-            if len(args) == 1:
-                print("** instance id missing **")
-            elif (args[0] + "." + args[1]) in models.storage.all():
-                if len(args) == 2:
-                    print("** attribute name missing **")
-                else:
-                    if len(args) == 3:
-                        print("** value missing **")
-                    else:
-                        if len(arg.split('"')) == 1:
-                            v_p = args[3]
+            if len(args) > 1:
+                k = args[0] + "." + args[1]
+                if k in models.storage.all():
+                    if len(args) > 2:
+                        if len(args) > 3:
+                            if args[0] == "Place":
+                                if args[2] in integers:
+                                    try:
+                                        args[3] = int(args[3])
+                                    except:
+                                        args[3] = 0
+                                elif args[2] in floats:
+                                    try:
+                                        args[3] = float(args[3])
+                                    except:
+                                        args[3] = 0.0
+                            setattr(models.storage.all()[k], args[2], args[3])
+                            models.storage.all()[k].save()
                         else:
-                            v_p = arg.split('"')[1]
-                            it = models.storage.all()[args[0] + "." + args[1]]
-                            setattr(it, args[2], v_p)
-                            models.storage.all()[args[0] + "." + args[1]] = it
-                            storage.save()
+                            print("** value missing **")
+                    else:
+                        print("** attribute name missing **")
+                else:
+                    print("** no instance found **")
             else:
-                print("** no instance found **")
+                print("** instance id missing **")
         else:
-            print("** class name missing **")
+            print("** class doesn't exist **")
+
     def emptyline(self):
         """Called when an empty line is entered in response to the prompt"""
         return False
