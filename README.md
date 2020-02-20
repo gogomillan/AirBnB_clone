@@ -105,5 +105,5 @@ No known bugs at this time.
 Gonzalo Gomez - [Github](https://github.com/gogomillan)
 David Ortiz - [Github](https://github.com/daod2003)
 
-## Lincense
+## License
 [LICENSE](LICENSE) - Public Domain. No copy write protection. 
