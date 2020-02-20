@@ -51,15 +51,13 @@ class TestPlace(unittest.TestCase):
         msj = "User_id isn't public"
         my_model1 = Place()
         my_model1.user_id = "b6a6e15c-c67d-4312-9a75-9d084935e579"
-        self.assertEqual(my_model1.user_id,
-                         "b6a6e15c-c67d-4312-9a75-9d084935e579")
+        self.assertEqual(my_model1.user_id, "b6a6e15c-c67d-4312-9a75-9d084935e579")
 
     def test_city_id_public(self):
         msj = "City_id isn't public"
         my_model1 = Place()
         my_model1.city_id = "b6a6e15c-c67d-4312-9a75-9d084935e579"
-        self.assertEqual(my_model1.city_id,
-                         "b6a6e15c-c67d-4312-9a75-9d084935e579")
+        self.assertEqual(my_model1.city_id, "b6a6e15c-c67d-4312-9a75-9d084935e579")
 
     def test_name_public(self):
         msj = "Name isn't public"
@@ -112,9 +110,8 @@ class TestPlace(unittest.TestCase):
     def test_amenity_ids_public(self):
         msj = "Longitude isn't public"
         my_model1 = Place()
-        my_model1.amenity_ids = ["b6a6e15c-c67d-4312-9a75-9d084935e579"]
-        self.assertEqual(my_model1.amenity_ids,
-                         ["b6a6e15c-c67d-4312-9a75-9d084935e579"])
+        my_model1.amenity_ids = [ "b6a6e15c-c67d-4312-9a75-9d084935e579" ]
+        self.assertEqual(my_model1.amenity_ids, [ "b6a6e15c-c67d-4312-9a75-9d084935e579" ])
 
     def test_id(self):
         '''test if the id of two instances are different'''
@@ -125,13 +122,13 @@ class TestPlace(unittest.TestCase):
     def test_executable_file(self):
         '''test if file has permissions u+x to execute'''
         # Check for read access
-        is_read_true = os.access('models/base_model.py', os.R_OK)
+        is_read_true = os.access('models/place.py', os.R_OK)
         self.assertTrue(is_read_true)
         # Check for write access
-        is_write_true = os.access('models/base_model.py', os.W_OK)
+        is_write_true = os.access('models/place.py', os.W_OK)
         self.assertTrue(is_write_true)
         # Check for execution access
-        is_exec_true = os.access('models/base_model.py', os.X_OK)
+        is_exec_true = os.access('models/place.py', os.X_OK)
         self.assertTrue(is_exec_true)
 
     def test_is_an_instance(self):
