@@ -1,4 +1,4 @@
-# AirBnB Clone - The Console
+# AirBnB Clone - The Console + Web static
 the first segment of the AirBnB project at Holberton School is the console in this project we are going to share all our knowledge about higher level programming. The goal is to eventually deploy our server a simple copy of AirBnB. A command interpreter is created in this segment to manage objects.
 
 #### Functionalities of this command interpreter:
